@@ -1,4 +1,4 @@
-package chainer.models
+package donatron.models
 
 import cats.Show
 import cats.implicits._

@@ -1,14 +1,14 @@
-package chainer
+package donatron
 
 import cats.effect.IO
-import chainer.models._
+import donatron.models._
 import org.scalatest.{EitherValues, Matchers, WordSpec}
 
-class CoinMachineSpec extends WordSpec with Matchers with EitherValues {
+class DonatronSpec extends WordSpec with Matchers with EitherValues {
 
-  val chainMachine: CoinMachine[IO] = new CoinMachine[IO]
+  val chainMachine: Donatron[IO] = new Donatron[IO]
 
-  def getResponse(req: Request): Response = chainMachine.insert(req).unsafeRunSync()
+  def getResponse(req: Request): Response = chainMachine.donate(req).unsafeRunSync()
 
   "" should {
 
@@ -72,7 +72,7 @@ class CoinMachineSpec extends WordSpec with Matchers with EitherValues {
     "return Exception when Request has valid ints greater than 10k" in {
       val req = Request((9999 to 10000).map(_.toString).toList)
 
-      chainMachine.insert(req).attempt.unsafeRunSync().left.value.getMessage shouldEqual "Uh oh!"
+      chainMachine.donate(req).attempt.unsafeRunSync().left.value.getMessage shouldEqual "Uh oh!"
     }
   }
 }

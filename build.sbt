@@ -1,4 +1,4 @@
-name := "Chainer"
+name := "Donatron"
 
 version := "0.1"
 
